@@ -4,4 +4,6 @@ __pycache__/
 memory.db
 outputs/
 venv/
+.venv/
+
 

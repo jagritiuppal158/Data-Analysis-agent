@@ -6,10 +6,20 @@ from agent.data import load_table
 from agent.memory import MemoryStore
 
 st.set_page_config(page_title="Data Analysis Agent", layout="wide")
+st.markdown(
+    """
+    <style>
+    [data-testid="stChatMessageAvatarUser"],
+    [data-testid="stChatMessageAvatarAssistant"] {
+        display: none;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 DB = "memory.db"
 memory = MemoryStore(DB)
 
-# ------------------------------------------------------------------ sidebar
 with st.sidebar:
     st.header("Dataset")
     up = st.file_uploader("Upload CSV / Excel / JSON", type=["csv", "tsv", "txt", "xlsx", "json"])
@@ -21,7 +31,7 @@ with st.sidebar:
                             help="auto = Groq if GROQ_API_KEY set, else Gemini if GOOGLE_API_KEY set, else local Ollama")
     api_key = st.text_input("API key (optional)", "", type="password",
                             help="Paste your free Groq or Gemini key here. Used for this session only, never saved.")
-    model = st.text_input("Model (optional)", "", help="e.g. llama-3.3-70b-versatile · gemini-2.5-flash · llama3.1:8b")
+    model = st.text_input("Model (optional)", "", help="Examples: llama-3.3-70b-versatile, gemini-2.5-flash, llama3.1:8b")
 
 df, name = None, None
 if up is not None:
@@ -31,7 +41,7 @@ elif sample != "-":
 
 st.title("Data Analysis Agent")
 if df is None:
-    st.info("Pick or upload a dataset begin.")
+    st.info("Choose or upload a dataset to begin.")
     st.stop()
 
 key = (name, provider, model, api_key)
@@ -48,7 +58,7 @@ agent: DataAgent = st.session_state.agent
 with st.expander(f"Preview: {name} ({len(df)} rows, {df.shape[1]} columns)"):
     st.dataframe(df.head(50), width="stretch")
 
-# ------------------------------------------------------- memory panel (control)
+
 with st.sidebar:
     st.header("Memory")
     mems = memory.list(agent.ctx.scope)
@@ -69,7 +79,7 @@ def show_trace(trace):
         return
     with st.expander(f"Tool calls ({len(trace)})"):
         for i, t in enumerate(trace, 1):
-            status = " Error" if t["error"] else ""
+            status = " (error)" if t["error"] else ""
             st.markdown(f"Tool: `{t['tool']}` ({t['seconds']}s){status}")
             st.code(json.dumps(t["args"], indent=2, default=str), language="json")
             st.code(t["result"][:1500], language="json")
