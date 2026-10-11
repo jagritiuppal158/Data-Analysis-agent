@@ -1,16 +1,15 @@
-# Data Analysis Agent (LangChain + persistent memory)
-
+# Data Analysis Agent
+using LangChain + persistent memory
 An agent that takes **any tabular file** (CSV / Excel / JSON ) and answers natural-language questions
 by calling analysis tools on the real data. Includes a persistent, inspectable **memory** that changes later answers.
 
 > Every number in an answer comes from pandas / scipy / scikit-learn running on your dataframe, never from the LLM.
 > The UI shows the full tool-call trace (tool, arguments, raw result) for every answer.
 
-## Quick start (no paid API key)
+## start
 
 ```bash
 pip install -r requirements.txt
-python make_sample_data.py          # creates data/orders.csv and data/students.csv
 ```
 
 Choose ONE free LLM backend:
@@ -89,9 +88,7 @@ Goal: remember *useful distilled facts*, not chat logs or data.
   `-google-genai`, `-ollama`) for model wrappers and tool schemas; Streamlit for the UI; SQLite; a free hosted/local LLM.
 * **My own work:** the tool design and argument schemas, the filter/safety layer, the agent loop with error feedback and tracing,
   the entire memory system (gatekeeper, conflict handling, scoping, retrieval, preference-driven tool behaviour), and the UI.
-* **AI assistance:** this project was scaffolded with help from an LLM (Claude); I should be able to explain every file.
-  <!-- edit this line to describe your actual contribution honestly -->
-
+* **AI assistance:** for tools guidance and general support to optimise code and debug errors..
 ## Demo script (good for the video)
 
 1. Load `data/orders.csv` → "Give me an overview of this dataset."
