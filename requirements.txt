@@ -1,0 +1,11 @@
+pandas>=2.2
+numpy
+scipy
+scikit-learn
+matplotlib
+python-dotenv
+langchain-core>=0.3
+langchain-groq        
+langchain-google-genai  
+langchain-ollama  
+streamlit
