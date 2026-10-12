@@ -89,7 +89,7 @@ Goal: remember *useful distilled facts*, not chat logs or data.
 * **My own work:** the tool design and argument schemas, the filter/safety layer, the agent loop with error feedback and tracing,
   the entire memory system (gatekeeper, conflict handling, scoping, retrieval, preference-driven tool behaviour), and the UI.
 * **AI assistance:** for tools guidance and general support to optimise code and debug errors..
-## Demo script (good for the video)
+## Demo script 
 
 1. Load `data/orders.csv` → "Give me an overview of this dataset."
 2. "Which region has the highest total revenue?" → show trace → `aggregate_data`
