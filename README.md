@@ -102,7 +102,7 @@ Goal: remember *useful distilled facts*, not chat logs or data.
 8. "Actually active customers should only be status == active." → memory panel shows the replaced definition.
 9. Switch to `data/students.csv` (different schema, spaces in names) and ask "what predicts exam score?".
 
-## Limitations / honest notes
+## Limitations
 
 * Free-tier LLMs rate-limit and small local models sometimes pick the wrong tool; the loop retries and feeds errors back, but
   quality depends on the model.
